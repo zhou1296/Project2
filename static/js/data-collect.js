@@ -3,9 +3,6 @@ const API_url = "https://api.covid19api.com"
 
 // Can be cited globally?
 let sum_data = d3.select("div#sumdata");
-var sum = {};
-
-console.log(sum_data);
 
 function RefreshData() {
 	d3.json(API_url + "/", function(data) {
@@ -24,7 +21,6 @@ function RefreshData() {
 				detail.TotalRecovered = +detail.TotalRecovered;
 			});
 
-			console.log(d.Countries[0]);
 			// Now create the country tags
 			sum_data.selectAll("div.country").data(d.Countries)
 				.enter()
@@ -39,6 +35,8 @@ function RefreshData() {
 				.attr("TotalConfirmed", country => country.TotalConfirmed)
 				.attr("TotalDeaths", country => country.TotalDeaths)
 				.attr("TotalRecovered", country => country.TotalRecovered);
+
+			// console.log(d3.select("div.country#germany").attr("countrycode"))
 		});
 	});	
 }
