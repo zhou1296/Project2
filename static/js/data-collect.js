@@ -8,27 +8,10 @@ let selected = d3.select("#selDataset");
 
 function RefreshData() {
 	// Clear Old Data
-	data_to_replace = d3.selectAll("div.country").remove();
+	d3.selectAll("div.country").remove();
 
 	// Replace with New Data
 	Init();
-
-	// Refresh the appropriate Visualization
-	switch(selected._groups[0][0].value) {
-		case "Data Table" : {
-			console.log("Found the table");
-			break;
-		}
-		case "Compare with New Zealand" : {
-			Hellow();
-			break;
-		}
-		case "Map Ranking" : {
-			console.log("What else could it be?");
-			break;
-		}
-		default : {console.log("Errr.... next!");}
-	}
 }
 
 function Init() {
@@ -62,6 +45,9 @@ function Init() {
 				.attr("TotalConfirmed", country => country.TotalConfirmed)
 				.attr("TotalDeaths", country => country.TotalDeaths)
 				.attr("TotalRecovered", country => country.TotalRecovered);
+
+			// Refresh the appropriate Visualization
+			// Your Function Goes Here; make sure to use sum_data in your function!
 
 			// console.log(d3.select("div.country#germany").attr("countrycode"))
 		});
