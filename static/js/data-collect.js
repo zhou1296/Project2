@@ -3,8 +3,35 @@ const API_url = "https://api.covid19api.com"
 
 // Can be cited globally?
 let sum_data = d3.select("div#sumdata");
+let buttons = d3.selectAll("button");
+let selected = d3.select("#selDataset");
 
 function RefreshData() {
+	// Clear Old Data
+	data_to_replace = d3.selectAll("div.country").remove();
+
+	// Replace with New Data
+	Init();
+
+	// Refresh the appropriate Visualization
+	switch(selected._groups[0][0].value) {
+		case "Data Table" : {
+			console.log("Found the table");
+			break;
+		}
+		case "Compare with New Zealand" : {
+			Hellow();
+			break;
+		}
+		case "Map Ranking" : {
+			console.log("What else could it be?");
+			break;
+		}
+		default : {console.log("Errr.... next!");}
+	}
+}
+
+function Init() {
 	d3.json(API_url + "/", function(data) {
 		// This will allow us to access each path as needed
 		const api_nav = data;
@@ -38,7 +65,7 @@ function RefreshData() {
 
 			// console.log(d3.select("div.country#germany").attr("countrycode"))
 		});
-	});	
+	});
 }
 
-RefreshData();
+Init();
