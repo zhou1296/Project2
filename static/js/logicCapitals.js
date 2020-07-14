@@ -17,27 +17,43 @@ d3.json(queryUrl, function(data) {
   
 
   d3.json(countriesJson, function(capitals) {
-    console.log(capitals);
+    
+    listOfCaptials =[];
+    function Capital(name, lat, long) {
+      this.name = name;
+      this.lat = lat;
+      this.long = long;
+      // this.confirmed = confirmed;
+    };
+
+
+    // console.log(capitals);
     // console.log(filter_country);
     filter_country.forEach((f)=>{
-        console.log(f);
+        // console.log(f);
         var countryCode = f.CountryCode;
         // console.log(countryCode);
         
         
         // Attempting to grab the lat and lng from the countries JSON
         // ~~~~~~~~~~~
-        capitals.forEach((f)=>{
-            // console.log();
-             var latLng = f.latlng;
-             console.log(f.country_code);
-    
+        capitals.forEach((h)=>{
+            var latLong = h.latlng;
+            if(h.country_code == countryCode){
+              // console.log(h.country_code);
+              // console.log(h.latlng);
+              var newCountry = new Capital(h.country_code,h.latlng[0],h.latlng[1]);
+              // console.log(newCountry);
+              listOfCaptials.push(newCountry);
+              
+            }
+            
         });
-
+    
     });
+    
 
-
-
+    console.log(listOfCaptials);
 
 
 });
