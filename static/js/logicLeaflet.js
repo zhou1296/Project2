@@ -1,4 +1,4 @@
-// Store our API endpoint inside queryUrl
+// // Store our API endpoint inside queryUrl
 var queryUrl =  "https://api.covid19api.com/summary";
 
 // "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2014-01-01&endtime=" +
@@ -8,8 +8,8 @@ var queryUrl =  "https://api.covid19api.com/summary";
 
 // Perform a GET request to the query URL
 d3.json(queryUrl, function(data) {
-  // Once we get a response, send the data.features object to the createFeatures function
-  createFeatures(data.features);
+  
+  // createFeatures(data.features);
   console.log(data)
 });
 
@@ -38,6 +38,13 @@ function createMap(earthquakes) {
 
   // Define topoMap and darkmap layers
 
+  // var darkmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+  //   attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+  //   maxZoom: 18,
+  //   id: "dark-v10",
+  //   accessToken: API_KEY
+  // });
+
   var darkmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     maxZoom: 18,
@@ -45,10 +52,30 @@ function createMap(earthquakes) {
     accessToken: API_KEY
   });
 
+  
   var topoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
 	maxZoom: 18,
 	attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
 });
+  
+
+  var myGeoJSONPath = 'path/to/mymap.geo.json';
+  var myCustomStyle = {
+      stroke: false,
+      fill: true,
+      fillColor: '#fff',
+      fillOpacity: 1
+  }
+  $.getJSON(myGeoJSONPath,function(data){
+      var map = L.map('map').setView([39.74739, -105], 4);
+
+      L.geoJson(data, {
+          clickable: false,
+          style: myCustomStyle
+      }).addTo(map);
+  })
+
+  
 
   // Define a baseMaps object to hold our base layers
   var baseMaps = {
