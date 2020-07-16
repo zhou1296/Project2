@@ -1,10 +1,8 @@
-var queryUrl = "https://api.covid19api.com/summary";
 var countriesJson = "static/json/countries.json";
 
 // This spits out the ten countries with the most confirmed cases
 // ~~~~~~~~~~~~~~~~~ 
-d3.json(queryUrl, function(data) {
-
+function JoshCharts(data) {
   var myMap = L.map("map", {
     center: [15.5994, -28.6731],
     zoom: 3
@@ -16,7 +14,7 @@ d3.json(queryUrl, function(data) {
     maxZoom: 18,
     zoomOffset: -1,
     id: "mapbox/streets-v11",
-    accessToken: API KEY HERE;
+    accessToken: API_KEY
   }).addTo(myMap);
 
 
@@ -90,7 +88,5 @@ d3.json(queryUrl, function(data) {
     }).bindPopup("<h1>" + listOfCaptials[i].name + "</h1> <hr> <h3>Cases: " + listOfCaptials[i].totalNumCases + "</h3>").addTo(myMap);
   }
 
-});
-
-});
-
+  });
+}
