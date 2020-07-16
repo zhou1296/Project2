@@ -6,16 +6,35 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Leaflet Step-1</title>
 
+  <!-- kills favicon.ico 404 error -->
+  <link rel="icon" href="data:;base64,iVBORwOKGO=">
+
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.2/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.3.2/dist/leaflet.js"></script>
+    
+  <!-- Leaflet Timeline CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/leaflet.timeline@1.2.1/dist/leaflet.timeline.min.js"></script>
+
+  <!--D3 CDN-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.5.0/d3.min.js"></script>
+
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
-
-  <!-- Our CSS -->
-  <link rel="stylesheet" type="text/css" href="static/css/style.css">
 
   <!-- D3 JSON -->
   <script src="https://unpkg.com/simple-statistics@5.0.0/dist/simple-statistics.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.7/d3.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>
+
+  <!-- Leaflet JavaScript -->
+  <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
 
   <!-- BootStrap Content-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -23,6 +42,7 @@
 <body>
   <div class="container">
     <div class="row">
+      <!-- Title Box Here -->
       <div class="col-md-12 jumbotron text-center">
         <h1>COVID-19 Data (Current)</h1>
         <p>Use the interactive charts below to explore the dataset</p>
@@ -30,31 +50,35 @@
     </div>
     <div class="row">
       <div class="col-md-2">
+        <!-- Dropdown Selection-->
         <div class="well">
           <select id="selDataset" onchange="this.value">
             <option id="Zoey">Data Table</option>
             <option id="Josh">Compare with New Zealand</option>
             <option id="Ankur">Map Ranking</option>
           </select>
-          <button id="Refresh" onclick="RefreshData()">Refresh Data</button>
+          <button id="Refresh" onclick="Init()">Refresh Data</button>
         </div>
       </div>
     </div>
-    <div class="row">
-      <!-- The div that holds our map -->
-      <div id="map"></div>
-    </div>
   </div>
 
-  <!-- Leaflet JavaScript -->
-  <script src="https://unpkg.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
-  <!-- D3 JavaScript -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>
+  <!-- Zoe's second table-->
+  <div class="test2"></div>
+
+  <!-- The div that holds our map -->
+  <div id="map"></div>
+
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="static/css/style.css">
+
   <!-- API Key -->
   <script type="text/javascript" src="static/js/config.js"></script>
+
   <!-- Our JavaScript -->
-  <script type="text/javascript" src="static/js/logic.js"></script>
   <script type="text/javascript" src="static/js/data-collect.js"></script>
+  <script type="text/javascript" src="static/js/Zoey_graph_app.js"></script>
+  <script type="text/javascript" src="static/js/logic.js"></script>
   <script type="text/javascript" src="static/js/logicCapitals.js"></script>
 </body>
 </html>

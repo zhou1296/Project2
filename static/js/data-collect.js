@@ -5,24 +5,39 @@ const API_url = "https://api.covid19api.com"
 let sum_data = d3.select("div#sumdata");
 let buttons = d3.selectAll("button");
 let selected = d3.select("#selDataset");
+let chart = d3.select("div#map");
 
-
-// Refreshes the data upon clicking of the refresh button
-function RefreshData() {
-	// Clear Old Data
-	d3.selectAll("div.country").remove();
-
-	// Replace with New Data
-	Init();
-}
+let curr_map = selected.node().value;
 
 // Draws a new graph based on the selected graph dropwdown option
 function DrawImage(data) {
-	// console.log(data);
-	console.log()
+	// Determine the selected chart
+	curr_map = selected.node().value;
+
+	// Clear the first map
+	$("#map").empty();
+	$(".test2").empty();
+
+	// Determine which one to draw
+	switch(curr_map) {
+		case "Compare with New Zealand" : {
+			JoshCharts(data);
+			break;
+		}
+		case "Data Table" : {
+			ZoeyCharts(data);
+			break;
+		}
+		default : {
+		// case "Map Ranking" : {
+			AnkurChart(data);
+		}
+	}
 }
 
 function Init() {
+	// Either called initially by this JS file, or by clicking the 'Refresh'
+	// button in index.html
 	d3.json(API_url + "/", function(data) {
 		// This will allow us to access each path as needed
 		const api_nav = data;
@@ -39,8 +54,13 @@ function Init() {
 				detail.TotalRecovered = +detail.TotalRecovered;
 			});
 
-			// Your Function Goes Here; make sure to use sum_data in your function!
+			// Initial Drawing
 			DrawImage(d);
+
+			// Now listen for the chart type to change
+			selected.on("change", function() {
+				DrawImage(d);
+			});
 		});
 	});
 }
