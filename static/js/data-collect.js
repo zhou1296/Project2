@@ -7,19 +7,33 @@ let buttons = d3.selectAll("button");
 let selected = d3.select("#selDataset");
 let chart = d3.select("div#map");
 
-let curr_map = selected.node().value;
+// Animation Function
+function Animate(data) {		
+	if (chart._groups[0][0].style.cssText != "") {
+		// If we have a filled in style attr, then we can animate it out!
+		anime({
+			targets: '#map',
+			rotate: '16turn',
+			scale: 0,
+			duration: 4500,
+			easing: 'easeInOutSine'
+		});
+
+		// Animate the new chart into existence (after the delay)
+		setTimeout(function() {DrawImage(data)}, 5000);
+	} else {
+		DrawImage(data);
+	}
+}
 
 // Draws a new graph based on the selected graph dropwdown option
 function DrawImage(data) {
-	// Determine the selected chart
-	curr_map = selected.node().value;
-
 	// Clear the first map
 	$("#map").replaceWith('<div id="map"></div>');
 	$(".test2").empty();
 
 	// Determine which one to draw
-	switch(curr_map) {
+	switch(selected.node().value) {
 		case "Compare with New Zealand" : {
 			JoshCharts(data);
 			break;
@@ -33,6 +47,18 @@ function DrawImage(data) {
 			AnkurChart(data);
 		}
 	}
+
+	// Animate it into existence
+	anime({
+		targets: '#map',
+		rotate: '16turn',
+		scale: 0,
+		duration: 4500,
+		direction: 'reverse',
+		easing: 'easeInOutSine'
+	});
+
+	chart = d3.select("div#map");
 }
 
 function Init() {
@@ -55,11 +81,11 @@ function Init() {
 			});
 
 			// Initial Drawing
-			DrawImage(d);
+			Animate(d);
 
 			// Now listen for the chart type to change
 			selected.on("change", function() {
-				DrawImage(d);
+				Animate(d);
 			});
 		});
 	});
