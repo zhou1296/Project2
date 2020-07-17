@@ -7,7 +7,7 @@ d3.json(queryUrl, function(data) {
 
   var myMap = L.map("map", {
     center: [46.2276, 2.2137],
-    zoom: 3.5
+    zoom: 3
   });
 
   L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -23,7 +23,7 @@ d3.json(queryUrl, function(data) {
   country_list=data.Countries;
   console.log(country_list);
 
-  country_list.sort((a, b) => parseFloat(b.TotalConfirmed) - parseFloat(a.TotalConfirmed));
+  // country_list.sort((a, b) => parseFloat(b.TotalConfirmed) - parseFloat(a.TotalConfirmed));
 
   
   // console.log(country_list);
@@ -46,7 +46,7 @@ d3.json(queryUrl, function(data) {
  
     country_list.forEach((f)=>{
         //  console.log(f);
-        var country = f.Country
+        // var country = f.Country
         var countryCode = f.CountryCode;
         var confirmedNew = f.NewConfirmed; 
         var confirmedTotal = f.TotalConfirmed;
@@ -56,7 +56,7 @@ d3.json(queryUrl, function(data) {
         // ~~~~~~~~~~~
         capitals.forEach((h)=>{
             
-            if(h.name == country){
+            if(h.country_code == countryCode){
             // console.log(h.name);
               // console.log(h.latlng);
               
@@ -126,7 +126,8 @@ var baseMaps = {
 
 // Overlays that may be toggled on or off
 var overlayMaps = {
-  City_Layer: cityLayer
+  City_Layer: cityLayer,
+  Dark: dark
 };
 
 // Create map object and set default layers
