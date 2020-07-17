@@ -16,15 +16,9 @@ function AnkurChart(data) {
 
   
 
-  //console.log(data);
   country_list=data.Countries;
-  console.log(country_list);
 
   country_list.sort((a, b) => parseFloat(b.TotalConfirmed) - parseFloat(a.TotalConfirmed));
-
-  
-  // console.log(country_list);
-
   
 
   d3.json(countriesJson, function(capitals) {
@@ -39,10 +33,8 @@ function AnkurChart(data) {
     };
 
 
-    console.log(capitals);
  
     country_list.forEach((f)=>{
-        //  console.log(f);
         var country = f.Country
         var countryCode = f.CountryCode;
         var confirmedNew = f.NewConfirmed; 
@@ -54,17 +46,11 @@ function AnkurChart(data) {
         capitals.forEach((h)=>{
             
             if(h.name == country){
-            // console.log(h.name);
-              // console.log(h.latlng);
-              
-              
               //var newCountry = new Capital(h.country_code,h.latlng[0],h.latlng[1],confirmedNew,confirmedTotal);
               var newCountry = new Capital(h.name,h.latlng,confirmedNew,confirmedTotal);
               
               
-              // console.log(newCountry);
-              listOfCaptials.push(newCountry);
-              
+              listOfCaptials.push(newCountry);              
             }
             
         });

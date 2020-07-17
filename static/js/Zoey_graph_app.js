@@ -40,9 +40,7 @@ function ZoeyCharts(data) {
           var tbody=d3.select("div#map");
           tbody.html(" ");
           var inputElement_country = d3.select('#country');
-          var inputValue_country = inputElement_country.property("value");
-          console.log(inputValue_country);
-  
+          var inputValue_country = inputElement_country.property("value");  
       
       if(inputValue_country !=" ") {   
           var filter_data= tableData.filter(d=>{return d.Country==inputValue_country});
