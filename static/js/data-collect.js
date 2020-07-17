@@ -15,7 +15,7 @@ function DrawImage(data) {
 	curr_map = selected.node().value;
 
 	// Clear the first map
-	$("#map").empty();
+	$("#map").replaceWith('<div id="map"></div>');
 	$(".test2").empty();
 
 	// Determine which one to draw

@@ -18,14 +18,11 @@ function JoshCharts(data) {
   }).addTo(myMap);
 
 
-  //console.log(data);
   country_list=data.Countries;
-  //console.log(country_list);
   //var filter_country=country_list.filter(d=>d.TotalConfirmed).sort().reverse().slice(0,10);
   country_list.sort((a, b) => parseFloat(b.TotalConfirmed) - parseFloat(a.TotalConfirmed));
 
   
-  // console.log(country_list);
   filter_country=country_list.slice(0,10);
 
   
@@ -45,10 +42,7 @@ function JoshCharts(data) {
     };
 
 
-    // console.log(capitals);
-    // console.log(filter_country);
     filter_country.forEach((f)=>{
-         console.log(f);
         var countryCode = f.CountryCode;
         var confirmedNew = f.NewConfirmed; 
         var confirmedTotal = f.TotalConfirmed;
@@ -59,15 +53,12 @@ function JoshCharts(data) {
         capitals.forEach((h)=>{
             
             if(h.country_code == countryCode){
-              // console.log(h.country_code);
-              // console.log(h.latlng);
               
               
               //var newCountry = new Capital(h.country_code,h.latlng[0],h.latlng[1],confirmedNew,confirmedTotal);
               var newCountry = new Capital(h.country_code,h.latlng,confirmedNew,confirmedTotal);
               
               
-              // console.log(newCountry);
               listOfCaptials.push(newCountry);
               
             }
@@ -77,7 +68,6 @@ function JoshCharts(data) {
     });
     
 
-    console.log(listOfCaptials);
     for (var i = 0; i < listOfCaptials.length; i++) {
     L.circle(listOfCaptials[i].location, {
       fillOpacity: 0.75,
