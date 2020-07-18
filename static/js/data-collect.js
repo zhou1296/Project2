@@ -13,7 +13,6 @@ function Animate(data) {
 		// If we have a filled in style attr, then we can animate it out!
 		anime({
 			targets: '#map',
-			rotate: '16turn',
 			scale: 0,
 			duration: 4500,
 			easing: 'easeInOutSine'
@@ -51,7 +50,6 @@ function DrawImage(data) {
 	// Animate it into existence
 	anime({
 		targets: '#map',
-		rotate: '16turn',
 		scale: 0,
 		duration: 4500,
 		direction: 'reverse',
@@ -65,6 +63,7 @@ function FadeinTitle() {
 	anime({
 		targets: [".container-fluid", ".mx-auto"],
 		scale: 0,
+		rotate: '16turn',
 		direction: 'reverse',
 		easing: 'easeInOutSine',
 		duration: 5000
