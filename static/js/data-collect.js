@@ -61,10 +61,15 @@ function DrawImage(data) {
 	chart = d3.select("div#map");
 }
 
-// function FadeinTitle() {
-// 	var titlebox = d3.select(".container");
-// 	console.log(titlebox);
-// }
+function FadeinTitle() {
+	anime({
+		targets: [".container-fluid", ".mx-auto"],
+		scale: 0,
+		direction: 'reverse',
+		easing: 'easeInOutSine',
+		duration: 5000
+	});
+}
 
 function Init() {
 	// Either called initially by this JS file, or by clicking the 'Refresh'
@@ -96,5 +101,5 @@ function Init() {
 	});
 }
 
-// FadeinTitle();
-Init();
+FadeinTitle();
+setTimeout(function() {Init();}, 5000);
