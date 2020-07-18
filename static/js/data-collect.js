@@ -34,11 +34,11 @@ function DrawImage(data) {
 
 	// Determine which one to draw
 	switch(selected.node().value) {
-		case "Compare with New Zealand" : {
+		case "A Filterable Table" : {
 			DrawJoshData(data);
 			break;
 		}
-		case "Data Table" : {
+		case "Bar Graphs and Table" : {
 			ZoeyCharts(data);
 			break;
 		}
@@ -60,6 +60,11 @@ function DrawImage(data) {
 
 	chart = d3.select("div#map");
 }
+
+// function FadeinTitle() {
+// 	var titlebox = d3.select(".container");
+// 	console.log(titlebox);
+// }
 
 function Init() {
 	// Either called initially by this JS file, or by clicking the 'Refresh'
@@ -91,4 +96,5 @@ function Init() {
 	});
 }
 
+// FadeinTitle();
 Init();
