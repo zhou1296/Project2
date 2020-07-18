@@ -1,10 +1,12 @@
 var countriesJson = "static/json/countries.json";
 
+// This spits out the ten countries with the most confirmed cases
+// ~~~~~~~~~~~~~~~~~ 
 function AnkurChart(data) {
 
   var myMap = L.map("map", {
     center: [46.2276, 2.2137],
-    zoom: 3.5
+    zoom: 3
   });
 
   L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -16,9 +18,15 @@ function AnkurChart(data) {
 
   
 
+  //console.log(data);
   country_list=data.Countries;
+  console.log(country_list);
 
-  country_list.sort((a, b) => parseFloat(b.TotalConfirmed) - parseFloat(a.TotalConfirmed));
+  // country_list.sort((a, b) => parseFloat(b.TotalConfirmed) - parseFloat(a.TotalConfirmed));
+
+  
+  // console.log(country_list);
+
   
 
   d3.json(countriesJson, function(capitals) {
@@ -33,9 +41,11 @@ function AnkurChart(data) {
     };
 
 
+    console.log(capitals);
  
     country_list.forEach((f)=>{
-        var country = f.Country
+        //  console.log(f);
+        // var country = f.Country
         var countryCode = f.CountryCode;
         var confirmedNew = f.NewConfirmed; 
         var confirmedTotal = f.TotalConfirmed;
@@ -45,12 +55,18 @@ function AnkurChart(data) {
         // ~~~~~~~~~~~
         capitals.forEach((h)=>{
             
-            if(h.name == country){
+            if(h.country_code == countryCode){
+            // console.log(h.name);
+              // console.log(h.latlng);
+              
+              
               //var newCountry = new Capital(h.country_code,h.latlng[0],h.latlng[1],confirmedNew,confirmedTotal);
               var newCountry = new Capital(h.name,h.latlng,confirmedNew,confirmedTotal);
               
               
-              listOfCaptials.push(newCountry);              
+              // console.log(newCountry);
+              listOfCaptials.push(newCountry);
+              
             }
             
         });
@@ -109,7 +125,8 @@ var baseMaps = {
 
 // Overlays that may be toggled on or off
 var overlayMaps = {
-  City_Layer: cityLayer
+  City_Layer: cityLayer,
+  Dark: dark
 };
 
 // Create map object and set default layers
@@ -125,4 +142,4 @@ L.control.layers(baseMaps, overlayMaps).addTo(myMap);
 
 });
 
-}
+};
