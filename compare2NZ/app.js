@@ -9,6 +9,52 @@ d3.json(queryUrl, function(countryData) {
 data=countryData.Countries;
 console.log(data);
 
+function DrawTable(data) {
+  var areatodraw = d3.select('#map')
+  .append("div").attr("class", "row margin-top-50");
+
+  // The filter button
+  var panel = areatodraw
+    .append("div").attr("class", "col-md-2")
+    .append('aside').attr("class", "filters")
+    .append("div").attr("class", "panel panel-default");
+
+  panel.append("div").attr("class", "panel-heading").text(`Filter Search`);
+
+  var panelbody = panel.append("div").attr("class", "panel-body").append("form");
+  
+  var li = panelbody.append("div").attr("class", "form-group")
+    .append("ul").attr("class", "list-group").attr("id", "filters")
+    .append("li").attr("class", "filter list-group-item");
+
+  li.append("label").attr("for", "date").text(`Enter A Country`);
+  li.append("input").attr("class", "form-control").attr("id", "map2")
+    .attr("type", "text")
+    .attr("placeholder", "Malta");
+
+  panelbody.append("button").attr("id", "filter-btn").attr("type", "button")
+    .attr("class", "btn btn-default")
+    .text("Filter Table");
+
+  // The table
+  var table = areatodraw.append("div").attr("class", "col-md-10")
+    .append("div").attr("id", "table-area").attr("class", "")
+    .append("table").attr("id", "ufo-table").attr("class", "table table-striped");
+
+  var tablehead = table.append("thead").append("tr");
+
+  tablehead.append("th").attr("class", "table-head").text(`Country`);
+  tablehead.append("th").attr("class", "table-head").text(`New Confirmed`);
+  tablehead.append("th").attr("class", "table-head").text(`Total Confirmed`);
+  tablehead.append("th").attr("class", "table-head").text(`New Deaths`);
+  tablehead.append("th").attr("class", "table-head").text(`Total Deaths`);
+  tablehead.append("th").attr("class", "table-head").text(`% Confirmed vs NZ`);
+  tablehead.append("th").attr("class", "table-head").text(`# of Deaths compared to NZ`);
+
+  table.append("tbody");
+}
+
+DrawTable();
 // Stripping out unnecessary columns
 // https://stackoverflow.com/questions/54907549/keep-only-selected-keys-in-every-object-from-array
 var keys_to_keep = ['Country', 'NewConfirmed', 'TotalConfirmed', 'NewDeaths', 'TotalDeaths',];
@@ -41,7 +87,7 @@ var deathNZ  = outputNZ.TotalDeaths;
 data.forEach((entries)=>{
 
   entries.confirmedVsNZ = ((entries.TotalConfirmed/confNZ)*100).toFixed(2);
-  entries.deathsVsNZ = ((entries.TotalConfirmed-deathNZ));;
+  entries.deathsVsNZ = ((entries.TotalDeaths-deathNZ));;
 });
 
 console.log(data);
@@ -66,12 +112,12 @@ form.on("submit",runEnter);
 
 // Complete the event handler function for the form
 function runEnter() {
-  console.log("inside the function");
+  //console.log("inside the function");
     // Prevent the page from refreshing
     d3.event.preventDefault();
     
     // Select the input element and get the raw HTML node
-    let inputElement = d3.select("#country");
+    let inputElement = d3.select("#map2");
     let inputValue = inputElement.property("value");
   
     // Get the value property of the input element
