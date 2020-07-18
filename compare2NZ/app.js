@@ -41,7 +41,7 @@ var deathNZ  = outputNZ.TotalDeaths;
 data.forEach((entries)=>{
 
   entries.confirmedVsNZ = ((entries.TotalConfirmed/confNZ)*100).toFixed(2);
-  entries.deathsVsNZ = ((entries.TotalConfirmed-deathNZ));;
+  entries.deathsVsNZ = ((entries.TotalDeaths-deathNZ));;
 });
 
 console.log(data);
@@ -66,12 +66,12 @@ form.on("submit",runEnter);
 
 // Complete the event handler function for the form
 function runEnter() {
-  console.log("inside the function");
+  //console.log("inside the function");
     // Prevent the page from refreshing
     d3.event.preventDefault();
     
     // Select the input element and get the raw HTML node
-    let inputElement = d3.select("#country");
+    let inputElement = d3.select("#map");
     let inputValue = inputElement.property("value");
   
     // Get the value property of the input element
