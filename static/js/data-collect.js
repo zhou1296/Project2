@@ -35,7 +35,7 @@ function DrawImage(data) {
 	// Determine which one to draw
 	switch(selected.node().value) {
 		case "Compare with New Zealand" : {
-			JoshCharts(data);
+			DrawJoshData(data);
 			break;
 		}
 		case "Data Table" : {
